@@ -283,6 +283,7 @@
 
   function renderQR() {
     if (!vt) return;
+    console.log('Voting mode:', vt.backend.mode, 'Firebase:', vt.hasFirebase, 'Fallback:', vt.fallback);
     const demo = vt.backend.mode === 'local';
     const url = Voting.voteUrl(vt.session, demo);
     const onFile = location.protocol === 'file:' && !CFG.VOTE_BASE_URL;
