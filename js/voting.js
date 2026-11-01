@@ -138,8 +138,8 @@ window.Voting = (function () {
     if (hasFirebase && !wantsDemo) {
       try {
         const v = '10.14.1';
-        await loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-app-compat.js');
-        await loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-database-compat.js');
+       await loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-app-compat.js');
+       await loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-database-compat.js');
         if (!firebase.apps.length) firebase.initializeApp(FB);
         backend = createFirebase(session);
       } catch (err) {
