@@ -1,0 +1,138 @@
+/* ==========================================================================
+   theme.css — colors, fonts, background and Moroccan ornaments (shared)
+   Change the variables below to re-skin the whole presentation.
+   ========================================================================== */
+:root {
+  --emerald-950: #04150f;
+  --emerald-900: #06201b;
+  --emerald-800: #0b3b32;
+  --emerald-700: #115245;
+  --emerald-500: #1e7a66;
+  --gold: #c9a24b;
+  --gold-light: #e6cc85;
+  --gold-dim: rgba(201, 162, 75, 0.38);
+  --terracotta: #b5502f;
+  --terracotta-light: #d8734f;
+  --beige: #f3e9d2;
+  --beige-dim: #cbbf9f;
+
+  --font-title: 'Amiri', 'Noto Naskh Arabic', 'Times New Roman', serif;
+  --font-body: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+
+  /* direction helpers (RTL is the default) */
+  --d: -1;
+  --to-end: to left;
+
+  /* 8-point star shape used for number badges */
+  --star8: polygon(100% 50%, 84.2% 64.2%, 85.4% 85.4%, 64.2% 84.2%, 50% 100%, 35.8% 84.2%, 14.6% 85.4%, 15.8% 64.2%, 0% 50%, 15.8% 35.8%, 14.6% 14.6%, 35.8% 15.8%, 50% 0%, 64.2% 15.8%, 85.4% 14.6%, 84.2% 35.8%);
+}
+:root[dir='ltr'] { --d: 1; --to-end: to right; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--emerald-950);
+  color: var(--beige);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+button { font-family: inherit; color: inherit; }
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+/* ---------- animated Zellige background ---------- */
+.bg {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 35%, var(--emerald-800) 0%, var(--emerald-900) 55%, var(--emerald-950) 100%);
+}
+.bg::before {
+  content: ''; position: absolute; inset: -120px;
+  background: url('../images/zellige.svg') 0 0 / 120px 120px;
+  opacity: 0.1;
+  animation: drift 90s linear infinite;
+}
+.bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(2, 10, 8, 0.7) 100%);
+}
+.glow { position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%; }
+.g1 {
+  top: -25vmax; inset-inline-end: -15vmax;
+  background: radial-gradient(circle, rgba(30, 122, 102, 0.5), transparent 65%);
+  animation: float1 30s ease-in-out infinite alternate;
+}
+.g2 {
+  bottom: -32vmax; inset-inline-start: -20vmax;
+  background: radial-gradient(circle, rgba(181, 80, 47, 0.28), transparent 65%);
+  animation: float2 38s ease-in-out infinite alternate;
+}
+@keyframes drift { to { transform: translate(120px, 120px); } }
+@keyframes float1 { to { transform: translate(-6vmax, 8vmax) scale(1.1); } }
+@keyframes float2 { to { transform: translate(8vmax, -6vmax) scale(1.15); } }
+
+/* thin gold frame with diamond corners */
+.frame {
+  position: fixed; inset: 14px; z-index: 2; pointer-events: none;
+  border: 1px solid var(--gold-dim);
+}
+.frame i { position: absolute; width: 12px; height: 12px; background: var(--gold); transform: rotate(45deg); }
+.frame i:nth-child(1) { top: -6px; inset-inline-start: -6px; }
+.frame i:nth-child(2) { top: -6px; inset-inline-end: -6px; }
+.frame i:nth-child(3) { bottom: -6px; inset-inline-start: -6px; }
+.frame i:nth-child(4) { bottom: -6px; inset-inline-end: -6px; }
+
+/* ---------- shared ornaments ---------- */
+.gold-text {
+  background: linear-gradient(100deg, var(--gold) 0%, var(--gold-light) 40%, #fff3c9 50%, var(--gold-light) 60%, var(--gold) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: sheen 8s ease-in-out infinite;
+}
+@keyframes sheen { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+
+.chip {
+  display: inline-block; padding: 0.25rem 1rem;
+  border: 1px solid var(--gold-dim); border-radius: 99px;
+  background: rgba(6, 32, 27, 0.55); color: var(--gold-light); font-size: 1rem;
+}
+
+.divider { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 1rem 0; color: var(--gold); }
+.divider span { width: 5rem; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.divider svg { width: 1.5rem; height: 1.5rem; flex: none; }
+.divider--start { justify-content: flex-start; }
+.divider--start span:first-child { display: none; }
+
+/* Moroccan arch (doorway) with a keystone diamond */
+.arch {
+  position: relative;
+  border: 2px solid var(--gold);
+  border-radius: 50% 50% 0.5rem 0.5rem / 26% 26% 0.5rem 0.5rem;
+  background: linear-gradient(180deg, rgba(17, 82, 69, 0.55), rgba(6, 32, 27, 0.85));
+  box-shadow:
+    inset 0 0 0 0.6rem rgba(6, 32, 27, 0.9),
+    inset 0 0 0 calc(0.6rem + 1px) var(--gold-dim),
+    0 2rem 5rem rgba(0, 0, 0, 0.45);
+}
+.arch::before {
+  content: ''; position: absolute; top: -0.6rem; left: 50%;
+  width: 1rem; height: 1rem; margin-left: -0.5rem;
+  background: var(--gold); transform: rotate(45deg);
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.6rem 1.2rem; cursor: pointer;
+  border: 1px solid var(--gold); border-radius: 99px;
+  background: rgba(6, 32, 27, 0.7); font-size: 1rem; transition: background 0.25s, color 0.25s, transform 0.2s;
+}
+.btn:hover { background: var(--gold); color: var(--emerald-900); }
+.btn:active { transform: scale(0.97); }
+
+/* reduced motion switch (button in presenter panel, or REDUCED_MOTION in config.js) */
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;
+}
