@@ -16,7 +16,7 @@ window.APP_CONFIG = {
   // Public address of the folder where you hosted these files (used by the QR code).
   // Leave empty when the presentation is opened from the hosted address itself.
   // Example: "https://yourname.github.io/presentation/"
-  VOTE_BASE_URL: "https://mohammed2chourak.github.io/presentation/vote.html?s=J3RR",
+  VOTE_BASE_URL: "https://mohammed2chourak.github.io/presentation/",
 
   AUTO_OPEN_VOTING: true,                 // voting opens automatically when you reach a poll/quiz slide
   ARROWS_FOLLOW_READING_DIRECTION: true,  // in Arabic: ← = next, → = previous (clickers using PageUp/PageDown always work)
